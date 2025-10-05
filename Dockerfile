@@ -18,13 +18,13 @@ RUN npm run build
 # Production stage
 FROM denoland/deno:alpine-2.1.7
 
-WORKDIR /app
+WORKDIR /app/dist
 
 # Copy built files from builder
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist .
 
 # Expose port
 EXPOSE 8000
 
 # Start the application
-CMD ["deno", "run", "--allow-net", "--allow-read", "dist/server.cjs"]
+CMD ["deno", "run", "--allow-net", "--allow-read", "server.cjs"]
